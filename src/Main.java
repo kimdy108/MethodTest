@@ -2,6 +2,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
 
@@ -19,6 +21,14 @@ public class Main {
 //        System.out.println("test_convertDateFormatdatetime : " + convertDateFormatdatetime("2023-08-01 12:34:56.123"));
 //        String create_date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 //        System.out.println(create_date);
+
+        // kocom_ConvertDong
+//        convertDong("A");
+//        convertDong("B");
+//        convertDong("C");
+//        convertDong("D");
+//        convertDong("E");
+
 
         // 구구단
 //        Multiplication_Tables();
@@ -132,6 +142,22 @@ public class Main {
             }
         }
         return null;
+    }
+
+    public static String convertDong(String dong) {
+        Matcher matcher = Pattern.compile("[A-Z]").matcher(dong);
+        StringBuffer result = new StringBuffer();
+
+        while (matcher.find()) {
+            char originalChar = matcher.group().charAt(0);
+            int convertedChar = originalChar - 'A' + 101;
+            matcher.appendReplacement(result, String.valueOf(convertedChar));
+        }
+        matcher.appendTail(result);
+
+        System.out.println(result);
+
+        return result.toString();
     }
 
 }
