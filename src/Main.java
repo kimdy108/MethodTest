@@ -29,6 +29,45 @@ public class Main {
 //        convertDong("D");
 //        convertDong("E");
 
+        // kocom_ReConvertDong
+//        convertNumberToAlphabet("101");
+//        convertNumberToAlphabet("102");
+//        convertNumberToAlphabet("103");
+//        convertNumberToAlphabet("104");
+//        convertNumberToAlphabet("105");
+//        convertNumberToAlphabet("A");
+//        convertNumberToAlphabet("B");
+//        convertNumberToAlphabet("C");
+//        convertNumberToAlphabet("D");
+//        convertNumberToAlphabet("E");
+
+        // kocom_ResidentList
+//        convertResidentList("101","15","6");
+//        convertResidentList("102","15","6");
+//        convertResidentList("103","15","4");
+//        convertResidentList("104","15","4");
+//        convertResidentList("105","15","6");
+//        convertResidentList("106","15","4");
+//        convertResidentList("107","15","4");
+
+        // kocom_ResidentListAll
+//        convertResidentListAll("101","15","6");
+//        convertResidentListAll("102","15","6");
+//        convertResidentListAll("103","15","4");
+//        convertResidentListAll("104","15","4");
+//        convertResidentListAll("105","15","6");
+//        convertResidentListAll("106","15","4");
+//        convertResidentListAll("107","15","4");
+
+        // kocom_household
+//        convertHouseHold("101","15","6");
+//        convertHouseHold("102","15","6");
+//        convertHouseHold("103","15","4");
+//        convertHouseHold("104","15","4");
+//        convertHouseHold("105","15","6");
+//        convertHouseHold("106","15","4");
+//        convertHouseHold("107","15","4");
+
 
         // 구구단
 //        Multiplication_Tables();
@@ -158,6 +197,96 @@ public class Main {
         System.out.println(result);
 
         return result.toString();
+    }
+
+    public static String convertNumberToAlphabet(String numbers) {
+        Matcher matcher = Pattern.compile("\\b(1[01][0-9]|12[0-6])\\b").matcher(numbers);
+        StringBuffer result = new StringBuffer();
+
+        while (matcher.find()) {
+            String matchedNumber = matcher.group();
+            int number = Integer.parseInt(matchedNumber);
+            char convertedChar = (char) ('A' + number - 101);
+            matcher.appendReplacement(result, String.valueOf(convertedChar));
+        }
+        matcher.appendTail(result);
+
+        System.out.println(result);
+
+        return result.toString();
+    }
+
+    public static String convertResidentList(String dong, String floor, String line) {
+
+        String residentList = "";
+
+        String residentDong = convertDong(dong);
+
+        for (int i = 1; i <= Integer.valueOf(floor); i++) {
+
+            for (int j = 1; j <= Integer.valueOf(line); j++) {
+
+                for (int k = 0; k <= 4; k++) {
+
+                    residentList = residentDong + String.format("%02d",i) + "0" + j + k;
+
+                    System.out.println(residentList);
+
+                }
+
+            }
+
+        }
+
+        return residentList;
+    }
+
+    public static String convertResidentListAll(String dong, String floor, String line) {
+
+        String residentList = "";
+
+        String residentDong = convertDong(dong);
+
+        for (int i = 1; i <= Integer.valueOf(floor); i++) {
+
+            for (int j = 1; j <= Integer.valueOf(line); j++) {
+
+                for (int k = 0; k <= 4; k++) {
+
+                    residentList = residentDong + String.format("%02d",i) + "0" + j + k;
+
+                    if (k==4) System.out.print(residentList);
+                    else System.out.print(residentList + "|@|");
+
+                }
+
+                System.out.println();
+
+            }
+
+        }
+
+        return residentList;
+    }
+
+    public static String convertHouseHold(String dong, String floor, String line) {
+        String household = "";
+
+        int residentDong = Integer.parseInt(convertDong(dong));
+
+        for (int i = 1; i <= Integer.valueOf(floor); i++) {
+
+            for (int j = 1; j <= Integer.valueOf(line); j++) {
+
+                household = String.format("%04d", residentDong) + String.format("%02d",i) + "0" + j;
+
+                System.out.println(household);
+
+            }
+
+        }
+
+        return household;
     }
 
 }
